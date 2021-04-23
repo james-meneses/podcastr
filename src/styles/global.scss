@@ -35,6 +35,8 @@
 
 body  {
   background: var (--gray-50);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body, input, textarea, button {
