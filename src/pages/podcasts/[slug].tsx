@@ -4,9 +4,10 @@ import ptBR from 'date-fns/locale/pt-BR';
 import {useRouter} from 'next/router';
 import {GetStaticProps, GetStaticPaths} from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {api} from '../../services/api'
-import convertDurationToTimeString from '../../utils/convertDurationToTimeString.ts'
+import convertDurationToTimeString from '../../utils/convertDurationToTimeString'
 
 import styles from './podcast.module.scss'
 
@@ -28,22 +29,78 @@ type PodcastProps = {
 }
 
 export default function Podcast ({podcast}: PodcastProps) {
+    if(podcast === undefined) 
+      return null;
+      
     return (
       <div className={styles.podcast}>
         <div className={styles.thumbnailContainer} >
-          <button type="button">
-            <Image width={32} height={32} src="/arrow-left.svg" alt="Voltar" />
-          </button>
+          <Link href="/">  
+            <button type="button">
+              <img src="/arrow-left.svg" alt="Voltar" />
+            </button>
+          </Link>
+          <Image
+            width={700}
+            height={160}
+            src={podcast.thumbnail}
+            objectFit="cover"
+           />
+
+
+           <button type="button">
+             <img src="/play.svg" alt="Tocar podcast" />
+           </button>
         </div>
+
+         <header>
+           <h1>{podcast.title}</h1>
+           <span>{podcast.members}</span>
+           <span>{podcast.publishedAt}</span>
+           <span>{podcast.durationAsString}</span>
+         </header>
+
+         <div className={styles.description}
+              dangerouslySetInnerHTML={{ __html: podcast.description }} />
+
       </div>  
     )
 }
 
+// Generate the static paths that are gonna be available
+// on production
+// we call it dynamic SSG
 export const getStaticPaths: GetStaticPaths = async () => {
+  
+  // First we get the data that are gonna be prefetched
+  // in this case, our 2 last podcast are gonna be available
+  // upfront
+  const {data} = await api.get('/episodes', {
+    params: {
+      _limit: 2,
+      _sort : 'published_at',
+      _order: 'Desc'
+    }
+  })
+
+  // Here we set the paths generated on build
+  const paths = data.map(podcast => {
+    return {
+      params: {
+        slug: podcast.id
+      }
+    }
+  })
+
+  // Then, we simply return paths and set fallback wich can be:
+  // false => returns 404 for pages not generated on build
+  // true => not generated pages on build, are generated on client-side
+  // blocking => same as above, but page is shown only after loaded/rendered
+  // this last one is better for SEO :)
   return {
-    paths: [],
+    paths,
     fallback: 'blocking'
-  }
+  }  
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -56,7 +113,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }
 
-    console.log('slug', slug)
+    console.log('slug => ', slug)
 
     const { data } = await api.get(`/episodes/${slug}`)
     

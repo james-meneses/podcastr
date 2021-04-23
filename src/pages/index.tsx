@@ -2,7 +2,7 @@ import {GetStaticProps} from 'next';
 import {api} from '../services/api';
 import {format, parseISO} from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-import convertDurationToTimeString from '../utils/convertDurationToTimeString.ts';
+import convertDurationToTimeString from '../utils/convertDurationToTimeString';
 import Image from 'next/image';
 import Link from 'next/link';
 
