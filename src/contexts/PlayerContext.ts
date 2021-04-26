@@ -4,13 +4,14 @@ type Podcast = {
   title: string;
   members: string;
   thumbnail: string;
-  duration: string;
+  duration: number;
   url: string;
 }
 
 type PlayerContextData = {
-  PodcastList: Podcast[];
+  podcastList: Podcast[];
   currentPodcastIndex: number;
+  play: (podcast: Podcast) => void;
 }
 
 

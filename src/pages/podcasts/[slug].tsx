@@ -5,6 +5,9 @@ import {useRouter} from 'next/router';
 import {GetStaticProps, GetStaticPaths} from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import {useContext} from 'react';
+
+import { PlayerContext } from '../../contexts/PlayerContext'
 
 import {api} from '../../services/api'
 import convertDurationToTimeString from '../../utils/convertDurationToTimeString'
@@ -31,7 +34,9 @@ type PodcastProps = {
 export default function Podcast ({podcast}: PodcastProps) {
     if(podcast === undefined) 
       return null;
-      
+    
+    const {play} = useContext(PlayerContext);
+
     return (
       <div className={styles.podcast}>
         <div className={styles.thumbnailContainer} >
@@ -48,7 +53,7 @@ export default function Podcast ({podcast}: PodcastProps) {
            />
 
 
-           <button type="button">
+           <button type="button" onClick={() => play(podcast)}>
              <img src="/play.svg" alt="Tocar podcast" />
            </button>
         </div>

@@ -28,7 +28,13 @@
 		&.empty {
 			opacity: 0.5;
 		}
-	}
+  }
+
+  &.playing {
+    strong {
+      font-size: 1rem
+    }
+  }
 }
 
 .emptyPlayer {
@@ -45,6 +51,30 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.currentPodcast {
+  text-align: center;
+
+  img {
+    border-radius: 1.5rem;
+  }
+
+  strong {
+    display: block;
+    margin-top: 2rem;
+    font: 600 1.25rem Lexend, sans-serif;
+    line-height: 1.75rem
+  }
+
+  span {
+    display: block;
+    margin-top: 1rem;
+    opacity: 0.6;
+    line-height: 1.5rem
+  }
+}
+
+
 
 .progress {
 	display: flex;
