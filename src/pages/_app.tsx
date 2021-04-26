@@ -11,14 +11,24 @@ import styles from '../styles/app.module.scss'
 function MyApp({ Component, pageProps }) {
   const [podcastList, setPodcastList] = useState([]);
   const [currentPodcastIndex, setCurrentPodcastIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   function play (podcast) {
       setPodcastList([podcast]);
       setCurrentPodcastIndex(0);
+      setIsPlaying(true);
+  }
+
+  function togglePlay (podcast) { 
+    setIsPlaying(!isPlaying);
+  }
+
+  function setPlayingState (state: boolean) {
+    setIsPlaying(state);
   }
 
   return (
-    <PlayerContext.Provider value={{ podcastList, currentPodcastIndex, play }}>
+    <PlayerContext.Provider value={{ podcastList, currentPodcastIndex, play, isPlaying, togglePlay, setPlayingState }}>
   	<div className={styles.wrapper}>
   		<main>
 	  		<Header></Header>
