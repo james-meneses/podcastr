@@ -5,14 +5,14 @@ import ptBR from 'date-fns/locale/pt-BR';
 import convertDurationToTimeString from '../utils/convertDurationToTimeString';
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head';
 
-import { PlayerContext } from '../contexts/PlayerContext'
+import { usePlayer } from '../contexts/PlayerContext'
 
 import styles from './home.module.scss'
-import {useContext} from 'react'
 
 
-type Episode = {
+type Podcast = {
   id: string;
   title: string;
   members: string;
@@ -24,42 +24,48 @@ type Episode = {
 }
 
 type HomeProps = {
-  latestEpisodes: Episode[],
-  allEpisodes   : Episode[]  
+  latestPodcasts: Podcast[],
+  allPodcasts   : Podcast[]  
 }
 
-export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
+export default function Home({latestPodcasts, allPodcasts}: HomeProps) {
 
-  const {play} = useContext(PlayerContext);
+  const {play, playList} = usePlayer();
 
+  const podcastList = [...latestPodcasts,...allPodcasts]
+ 
   return (
     <div className={styles.homepage}>
-      <section className={styles.latestEpisodes}>
+      <Head>
+        <title>Podcastr</title>
+      </Head>
+
+      <section className={styles.latestPodcasts}>
         <h2>Últimos Lançamentos</h2>
         <ul>
         {
-          latestEpisodes.map(episode => {
+          latestPodcasts.map((podcast, index) => {
             return (
-              <li key={episode.id} className={styles.featuredEpisode}>
+              <li key={podcast.id} className={styles.featuredpodcast}>
                 
-                <Image width={192} height={192} src={episode.thumbnail}
-                       alt={episode.title} objectFit="cover" />
+                <Image width={192} height={192} src={podcast.thumbnail}
+                       alt={podcast.title} objectFit="cover" />
 
-                <div className={styles.episodeDetails}>
-                  <Link href={`/podcasts/${episode.id}`}>
-                    <a className={styles.episodeLink}>
-                      {episode.title}
+                <div className={styles.podcastDetails}>
+                  <Link href={`/podcasts/${podcast.id}`}>
+                    <a className={styles.podcastLink}>
+                      {podcast.title}
                     </a>
                   </Link>
-                  <p>{episode.members}</p>
+                  <p>{podcast.members}</p>
 
-                  <span>{episode.publishedAt}</span>
-                  <span>{episode.durationAsString}</span>
+                  <span>{podcast.publishedAt}</span>
+                  <span>{podcast.durationAsString}</span>
 
                 </div> 
                 
-                <button type="button" onClick={() => play(episode)}>
-                  <img src="/play-green.svg" alt="Tocar episódio" />
+                <button type="button" onClick={() => playList(podcastList, index)}>
+                  <img src="/play-green.svg" alt="Tocar podcast" />
                 </button>
               </li>
               )
@@ -68,7 +74,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
         </ul>
       </section>
 
-    <section className={styles.allEpisodes}>
+    <section className={styles.allPodcasts}>
       <h2>Todos os Episódios</h2>
       
       <table>
@@ -83,23 +89,23 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
           </tr>
         </thead>
         <tbody>
-          { allEpisodes.map( episode => {
+          { allPodcasts.map( (podcast, index) => {
               return (
-                <tr key={episode.id} >
+                <tr key={podcast.id} >
                   <td style={{width:80}}>
                     <Image width={120}
-                      height={120} src={episode.thumbnail}
-                      alt={episode.title} objectFit="cover" />
+                      height={120} src={podcast.thumbnail}
+                      alt={podcast.title} objectFit="cover" />
                   </td>
                   <td> 
-                    <Link href={`/podcasts/${episode.id}`}>
-                    <a>{episode.title}</a> 
+                    <Link href={`/podcasts/${podcast.id}`}>
+                    <a>{podcast.title}</a> 
                     </Link> 
                   </td>
-                  <td> {episode.members} </td>
-                  <td style={{ width: 100 }}> {episode.publishedAt} </td>
-                  <td> {episode.durationAsString} </td>
-                  <td><button type="button" onClick={() => play(episode)}>
+                  <td> {podcast.members} </td>
+                  <td style={{ width: 100 }}> {podcast.publishedAt} </td>
+                  <td> {podcast.durationAsString} </td>
+                  <td><button type="button" onClick={() => playList(podcastList, index + latestPodcasts.length )}>
                   <img src="/play-green.svg" alt="Tocar episódio" />
                 </button></td>
 
@@ -111,7 +117,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
 
     </section>
 
-    <p style={{'padding':'25px','display': 'none'}}>{JSON.stringify(allEpisodes)}</p>
+    <p style={{'padding':'25px','display': 'none'}}>{JSON.stringify(allPodcasts)}</p>
     </div>
     ) 
 }
@@ -125,25 +131,25 @@ export const getStaticProps: GetStaticProps = async () =>  {
     }
   })
 
-  const episodes = data.map (episode => {
+  const podcasts = data.map (podcast => {
     return { 
-      id: episode.id,
-      title: episode.title,
-      members: episode.members,
-      publishedAt: format(parseISO(episode.published_at), 'd MMM yy', {locale: ptBR}), 
-      thumbnail: episode.thumbnail,
-      duration: Number(episode.file.duration),
-      durationAsString: convertDurationToTimeString(Number(episode.file.duration)), 
-      url: episode.file.url
+      id: podcast.id,
+      title: podcast.title,
+      members: podcast.members,
+      publishedAt: format(parseISO(podcast.published_at), 'd MMM yy', {locale: ptBR}), 
+      thumbnail: podcast.thumbnail,
+      duration: Number(podcast.file.duration),
+      durationAsString: convertDurationToTimeString(Number(podcast.file.duration)), 
+      url: podcast.file.url
     }})
 
-  const latestEpisodes = episodes.splice(0,2)
-  const allEpisodes    = episodes.slice(2, episodes.length)
+  const latestPodcasts = podcasts.slice(0,2)
+  const allPodcasts    = podcasts.slice(2, podcasts.length)
 
   return {
     props: {
-      latestEpisodes,
-      allEpisodes,
+      latestPodcasts,
+      allPodcasts,
     },
     revalidate: 60
   }

@@ -10,7 +10,7 @@
 
 }
 
-.latestEpisodes {
+.latestPodcasts {
   ul { 
     list-style: none;
     display: grid;
@@ -36,7 +36,7 @@
       border-radius: 1rem;
     }
 
-    .episodeDetails { 
+    .podcastDetails { 
       flex: 1;
       margin-left: 1rem;
       max-width: 70%;
@@ -118,7 +118,7 @@
   }
 }
 
-.allEpisodes {
+.allPodcasts {
   padding-bottom: 2rem;
 
   table {

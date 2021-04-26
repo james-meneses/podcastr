@@ -5,9 +5,9 @@ import {useRouter} from 'next/router';
 import {GetStaticProps, GetStaticPaths} from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import {useContext} from 'react';
+import Head from 'next/head';
 
-import { PlayerContext } from '../../contexts/PlayerContext'
+import { usePlayer } from '../../contexts/PlayerContext'
 
 import {api} from '../../services/api'
 import convertDurationToTimeString from '../../utils/convertDurationToTimeString'
@@ -35,10 +35,14 @@ export default function Podcast ({podcast}: PodcastProps) {
     if(podcast === undefined) 
       return null;
     
-    const {play} = useContext(PlayerContext);
+    const {play} = usePlayer();
+
 
     return (
       <div className={styles.podcast}>
+    <Head>
+      <title>{podcast.title} | Podcastr</title>
+    </Head>
         <div className={styles.thumbnailContainer} >
           <Link href="/">  
             <button type="button">
