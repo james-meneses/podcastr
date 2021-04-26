@@ -55,7 +55,7 @@ export function PlayerContextProvider ({children}: PlayerContextProviderProps) {
     setIsPlaying(true);
   }
 
-  function togglePlay (podcast) { 
+  function togglePlay () { 
     setIsPlaying(!isPlaying);
   }
 
@@ -95,7 +95,7 @@ export function PlayerContextProvider ({children}: PlayerContextProviderProps) {
   }
 
   return (
-    <PlayerContext.Provider value={{ podcastList, currentPodcastIndex, play, isPlaying, isLooping, togglePlay, toggleLoop, setPlayingState, playList, playNext, playPrevious, hasNext, hasPrevious, isShuffling, toggleShuffle, clearPlayerState}}>
+    <PlayerContext.Provider value={{ podcastList, currentPodcastIndex, play, isPlaying, isLooping, toggleLoop, togglePlay, setPlayingState, playList, playNext, playPrevious, hasNext, hasPrevious, isShuffling, toggleShuffle, clearPlayerState}}>
       {children}
     </PlayerContext.Provider>
     )
