@@ -4,7 +4,7 @@
   <div style="margin-bottom:1rem"><img src="https://img.shields.io/badge/author-james--meneses-6F48C9" alt="Author: James Meneses">
   </a>
   <img  src="https://img.shields.io/badge/license-MIT-%236F48C9" alt="License MIT"><div/>
-    <img alt="Home do Podcastr - Web app em React e NextJS para reprodução de podcasts" title="Podcastr - o melhor conteúdo para você" src="https://github.com/james-meneses/podcastr/blob/master/podcastr-home.png" />
+    <img alt="Home do Podcastr - Web app em React e NextJS para reprodução de podcasts" title="Podcastr - o melhor conteúdo para você" src="https://github.com/james-meneses/podcastr/blob/main/podcastr-home.png" />
 </div>
 
 <br>
