@@ -114,7 +114,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const { slug } = context.params
-
+    console.log('slug => ', slug)
     if(slug.indexOf('.svg') !== -1) {
       return {
         props: {},
@@ -122,7 +122,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }
 
-    console.log('slug => ', slug)
 
     const { data } = await api.get(`/episodes/${slug}`)
     
