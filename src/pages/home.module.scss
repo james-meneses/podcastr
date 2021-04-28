@@ -195,3 +195,47 @@
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .homepage {
+    padding: 0 3rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .homepage {
+    padding: 0 1.25rem;
+  
+    h2 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.875rem;
+      font-size: 1.325rem
+    }
+  }
+
+  .latestPodcasts {
+    ul {
+      display: block;
+
+      li {
+
+        &:first-child {
+          margin-bottom: 1rem; 
+        }
+      }
+    } // ends ul styles
+
+  } // ends .lastestPodcasts
+
+  .allPodcasts {
+
+    tr > th:nth-child(2n+1),
+    tr > td:nth-child(2n+1) {
+      display: none;
+    }
+
+
+
+
+  }
+}

@@ -18,3 +18,18 @@
 		margin-left: auto;
 	}	
 }
+
+@media screen and (max-width: 767px) {
+  .headerContainer {
+    padding: 1rem ;
+
+    p {
+      padding-left: .75rem;
+      margin-left: .75rem;
+    }
+
+    span {
+      display: none;
+    }
+  } 
+}

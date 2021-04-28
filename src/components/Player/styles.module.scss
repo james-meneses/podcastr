@@ -105,14 +105,19 @@
 		align-items: center;
 		justify-content: center;
 		margin-top: 2.5rem;
-		gap: 1.5rem;
 
 	button {
 			background: transparent;
 			font-size: 0;
 			border :0;
 
+      margin-left: .875rem;
+
       transition: filter 0.2s;
+
+      &:first-child {
+        margin-left: 0;
+      }
 
       &:disabled {
         cursor: not-allowed;
@@ -229,6 +234,14 @@
           font-size: .8rem;
           font-weight: normal;
         }
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+
+          width: 8rem;
+          padding-left: 2px;
+        }
       }
 
       footer {
@@ -250,7 +263,7 @@
       }
 
       .buttons {
-        gap: 1.125rem;
+        gap: 0;
       }
 
       button {
@@ -267,5 +280,16 @@
         }
       }
 
+      .emptyPlayer {
+        width: auto;
+        padding: .5rem 1.2rem;
+
+        strong {
+          font-size: .875rem;
+          line-height: 1.35em;
+          font-weight: normal;
+        }
+
+      }
   }
 }

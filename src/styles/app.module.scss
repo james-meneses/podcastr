@@ -9,5 +9,12 @@
 @media screen and (max-width: 1200px) {
   .wrapper {
     display: block;
+    padding-bottom: 26vh;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    padding-bottom: 21vh;
   }
 }
