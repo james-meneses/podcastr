@@ -39,6 +39,7 @@ export default function Podcast ({podcast}: PodcastProps) {
 
 
     return (
+      <div className={styles.podcastContainer}>
       <div className={styles.podcast}>
     <Head>
       <title>{podcast.title} | Podcastr</title>
@@ -72,7 +73,8 @@ export default function Podcast ({podcast}: PodcastProps) {
          <div className={styles.description}
               dangerouslySetInnerHTML={{ __html: podcast.description }} />
 
-      </div>  
+      </div> 
+      </div> 
     )
 }
 

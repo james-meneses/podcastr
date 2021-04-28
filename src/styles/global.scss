@@ -39,6 +39,12 @@ body  {
   overflow-y: hidden;
 }
 
+@media (max-width: 1200px) {
+  body {
+    overflow-y: auto;
+  }
+}
+
 body, input, textarea, button {
   font: 500 1rem Inter, sans-serif;
   color: var(--gray-500);
