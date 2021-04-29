@@ -37,7 +37,21 @@ export default function Home({latestPodcasts, allPodcasts}: HomeProps) {
   return (
     <div className={styles.homepage}>
       <Head>
-        <title>Podcastr</title>
+        <title>Podcastr | Os Melhores Podcasts de Tecnologia</title>
+
+        <meta name="description" content="O Podcastr traz os melhores podcasts de tecnologia para você. Fique atualizado ouvindo os grandes especialistas de TI." key="meta-description" />
+        <meta property="og:type" content="website" key="og-type" />
+        <meta property="og:url" content="https://podcastr-lac.vercel.app/" key="og-url" />
+        <meta property="og:title" content="Podcastr | Os Melhores Podcasts de Tecnologia" key="og-title" />
+        <meta property="og:image" content="/podcastr-home.png" key="og-image" />
+
+        <meta property="twitter:card" content="/podcastr-home.png" key="tt-image" />
+        <meta property="twitter:url" content="https://podcastr-lac.vercel.app/" key="tt-url" />
+        <meta property="twitter:title" content="Podcastr | Os Melhores Podcasts de Tecnologia" key="tt-title" />
+        <meta property="twitter:description" content="O Podcastr traz os melhores podcasts de tecnologia para você. Fique atualizado ouvindo os grandes especialistas de TI." key="tt-description" />
+        <meta property="twitter:image" content="/podcastr-home.png" key="tt-image" />
+
+
       </Head>
 
       <section className={styles.latestPodcasts}>

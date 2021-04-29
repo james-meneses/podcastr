@@ -65,7 +65,8 @@ export function Player () {
 	return (
 		<div className={podcast ? [styles.playerContainer, styles.playing].join(' ') : styles.playerContainer}>
     <Head>
-      <title>{podcast ? `Tocando ${podcast.title}` : 'Podcastr'}</title>
+      <title>{podcast ? `Tocando ${podcast.title}` : 'Podcastr | Os Melhores Podcasts de Tecnologia'}</title>
+      <meta name="description" content="O Podcastr traz os melhores podcasts de tecnologia para você. Fique atualizado ouvindo os grandes especialistas de TI."/>
     </Head>
 			<header>
 				<img src="/playing.svg" alt="Tocando.." />

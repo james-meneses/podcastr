@@ -42,7 +42,21 @@ export default function Podcast ({podcast}: PodcastProps) {
       <div className={styles.podcastContainer}>
       <div className={styles.podcast}>
     <Head>
-      <title>{podcast.title} | Podcastr</title>
+      <title key="meta-title">{ podcast.title || 'Podcastr | Os Melhores Podcasts de Tecnologia' }</title>
+      <meta name="description" content={podcast.description.slice(0, 170)} key="meta-description" />
+
+        <meta property="og:type" content="website" key="og-type" />
+        <meta property="og:url" content={`https://podcastr-lac.vercel.app/podcasts/${podcast.id}`} key="og-url" />
+        <meta property="og:title" content={ podcast.title || 'Podcastr | Os Melhores Podcasts de Tecnologia'} key="og-title" />
+        <meta property="og:image" content={podcast.thumbnail || '/podcastr-home.png'} key="og-image" />
+
+        <meta property="twitter:card" content={podcast.thumbnail || '/podcastr-home.png'} key="tt-image" />
+        <meta property="twitter:url" content="https://podcastr-lac.vercel.app/podcasts/" key="tt-url" />
+        <meta property="twitter:title" content={ podcast.title || 'Podcastr | Os Melhores Podcasts de Tecnologia'} key="tt-title" />
+        <meta property="twitter:description" content={podcast.description.slice(0, 170) || "O Podcastr traz os melhores podcasts de tecnologia para você. Fique atualizado ouvindo os grandes especialistas de TI." } key="tt-description" />
+        <meta property="twitter:image" content={podcast.thumbnail || '/podcastr-home.png'} key="tt-image" />
+
+
     </Head>
         <div className={styles.thumbnailContainer} >
           <Link href="/">  
