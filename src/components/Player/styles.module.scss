@@ -79,7 +79,6 @@
 .progress {
 	display: flex;
 	align-items: center;
-	gap: 1rem;
 	font-size: 0.875rem;
 
 	span {
@@ -87,6 +86,16 @@
 		width: 4rem;
 		text-align: center
 	}
+
+  span:first-of-type {
+    margin-right: 1rem;
+  }
+
+  span:last-of-type {
+    margin-left: 1rem;
+  }
+
+
 
 	.slider {
 		flex: 1;
@@ -241,6 +250,7 @@
 
           width: 8rem;
           padding-left: 2px;
+
         }
       }
 

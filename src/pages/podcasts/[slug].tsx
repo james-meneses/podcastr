@@ -51,8 +51,9 @@ export default function Podcast ({podcast}: PodcastProps) {
             </button>
           </Link>
           <Image
+            className={styles.thumbnail}
             width={700}
-            height={160}
+            height={320}
             src={podcast.thumbnail}
             objectFit="cover"
            />

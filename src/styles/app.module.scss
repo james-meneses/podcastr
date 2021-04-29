@@ -1,6 +1,18 @@
 .wrapper {
 	display: flex;
 
+  &::webkit-scrollbar {
+    width: 0.25rem;
+  }
+
+  &::webkit-scrollbar-track {
+    background: var(--gray-800);
+  }
+
+  &::webkit-scrollbar-thumb {
+    background: var(--gray-500);
+  }
+
 	main {
 		flex: 1;
 	}
